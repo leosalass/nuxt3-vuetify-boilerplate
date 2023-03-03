@@ -32,6 +32,7 @@
                       hint="Enter your full name"
                       persistent-hint
                       density="compact"
+                      class="medium_icon"
                     ></v-text-field>
                   </v-col>
                   <v-col xs="12" md="12">
@@ -45,6 +46,7 @@
                       hint="Enter your email to access this website"
                       persistent-hint
                       density="compact"
+                      class="medium_icon"
                     ></v-text-field>
                   </v-col>
                   <v-col xs="12" md="12">
@@ -62,6 +64,7 @@
                       counter
                       maxlength="32"
                       density="compact"
+                      class="medium_icon"
                     ></v-text-field>
                   </v-col>
                 </v-row>
@@ -116,5 +119,15 @@ export default {
 .v-input__control.v-input--has-state {
   padding-top: 14px !important;
   padding-bottom: 6px !important;
+}
+.small_icon .v-icon {
+    font-size: 12px;
+    top: 34%;
+    transform: translateY(-50%);
+}
+.medium_icon .v-icon {
+    font-size: 16px;
+    top: 34%;
+    transform: translateY(-50%);
 }
 </style>
