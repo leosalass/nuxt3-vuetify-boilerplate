@@ -31,6 +31,7 @@
                       variant="outlined"
                       hint="Enter your full name"
                       persistent-hint
+                      density="compact"
                     ></v-text-field>
                   </v-col>
                   <v-col xs="12" md="12">
@@ -43,6 +44,7 @@
                       variant="outlined"
                       hint="Enter your email to access this website"
                       persistent-hint
+                      density="compact"
                     ></v-text-field>
                   </v-col>
                   <v-col xs="12" md="12">
@@ -57,6 +59,9 @@
                       hint="Enter your password to access this website"
                       persistent-hint
                       :type="showPassword ? 'text' : 'password'"
+                      counter
+                      maxlength="32"
+                      density="compact"
                     ></v-text-field>
                   </v-col>
                 </v-row>
