@@ -5,6 +5,7 @@
         class="d-flex align-center mb-6"
         :height="login.wH"
         v-if="login.visible"
+        max-width="500"
       >
         <v-sheet class="ma-2 pa-2">
           <v-card :loading="false" min-width="500">
@@ -14,8 +15,7 @@
               density="comfortable"
               class="rounded-t-md rounded-b-0 text-center"
               variant="flat"
-            >
-              User Registration
+              >Singup
             </v-alert>
             <v-form>
               <v-card-text>
@@ -61,7 +61,27 @@
                 </v-row>
                 <v-row>
                   <v-col class="d-flex align-center justify-center">
-                    <v-btn color="primary">Register now</v-btn>
+                    <v-btn color="primary">Signup</v-btn>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col class="d-flex align-center justify-center"> </v-col>
+                </v-row>
+                <v-divider></v-divider>
+
+                <v-row>
+                  <v-col>
+                    <v-alert
+                      type="info"
+                      class="text-center"
+                      :stacked="false"
+                      density="compact"
+                      border="start"
+                    >
+                      <div class="text-black">
+                        Already have an account? <a href="#">Login</a>
+                      </div>
+                    </v-alert>
                   </v-col>
                 </v-row>
               </v-card-text>
@@ -85,9 +105,9 @@ export default {
     };
   },
   computed: {
-    passwordIcon(){
-        return this.showPassword ? 'fa-eye-slash' : 'fa-eye';
-    }
+    passwordIcon() {
+      return this.showPassword ? "fa-eye-slash" : "fa-eye";
+    },
   },
   mounted() {
     this.login.wH = window.innerHeight;
