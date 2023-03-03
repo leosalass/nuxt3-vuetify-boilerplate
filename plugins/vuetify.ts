@@ -1,12 +1,22 @@
-import { createVuetify, ThemeDefinition } from 'vuetify'
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
+import { createVuetify, ThemeDefinition } from "vuetify";
+import * as components from "vuetify/components";
+import * as directives from "vuetify/directives";
+import { aliases, fa } from "vuetify/iconsets/fa";
+import { mdi } from "vuetify/iconsets/mdi";
 
-export default defineNuxtPlugin(nuxtApp => {
-    const vuetify = createVuetify({
-        components,
-        directives
-    })
+export default defineNuxtPlugin((nuxtApp) => {
+  const vuetify = createVuetify({
+    components,
+    directives,
+    icons: {
+      defaultSet: "fa",
+      aliases,
+      sets: {
+        fa,
+        mdi,
+      },
+    },
+  });
 
-    nuxtApp.vueApp.use(vuetify)
-})
+  nuxtApp.vueApp.use(vuetify);
+});
