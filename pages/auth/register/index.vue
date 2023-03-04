@@ -10,6 +10,7 @@
           max-width="550"
           :loading="false"
           elevation="3"
+          :style="login.style"
           class="rounded-lg"
         >
           <v-row> <v-col class="text-center"></v-col> </v-row>
@@ -28,6 +29,7 @@
                     prepend-inner-icon="fa-solid fa-user"
                     variant="outlined"
                     hint="Enter your full name"
+
                     density="compact"
                     class="medium_icon"
                   ></v-text-field>
@@ -41,6 +43,7 @@
                     prepend-inner-icon="fa-solid fa-envelope"
                     variant="outlined"
                     hint="Enter your email to access this website"
+
                     density="compact"
                     class="medium_icon"
                   ></v-text-field>
@@ -55,6 +58,7 @@
                     @click:append-inner="showPassword = !showPassword"
                     variant="outlined"
                     hint="Enter your password to access this website"
+                    
                     :type="showPassword ? 'text' : 'password'"
                     counter
                     maxlength="32"
@@ -92,6 +96,7 @@ export default {
       login: {
         visible: false,
         wH: 0,
+        style: ''
       },
     };
   },
@@ -102,6 +107,7 @@ export default {
   },
   mounted() {
     this.login.wH = window.innerHeight;
+    this.login.style = window.innerWidth > 600 ? 'width:400px;' : ''
     this.login.visible = true;
   },
 };
@@ -126,5 +132,13 @@ export default {
 }
 .v-icon--clickable {
   padding: 15px;
+}
+.v-messages__message {
+  /*max-width: 500px !important;
+  display: block;
+  position: absolute;*/
+}
+.w-500{
+  width: 500px;
 }
 </style>
