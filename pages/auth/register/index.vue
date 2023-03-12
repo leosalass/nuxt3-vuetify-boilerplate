@@ -11,7 +11,7 @@
         <v-row>
           <v-col cols="12">
             <v-text-field
-              v-model="formFields.fullName"
+              v-model="formFields.username"
               :rules="[formRules.required, formRules.fullName]"
               :ripple="false"
               clearable
@@ -62,7 +62,7 @@
 
         <v-row>
           <v-col class="d-flex align-center justify-center">
-            <v-btn color="primary" width="100%">Signup</v-btn>
+            <v-btn @click="validate" color="primary" width="100%">Signup</v-btn>
           </v-col>
         </v-row>
 
@@ -90,7 +90,7 @@ export default {
     return {
       showPassword: false,
       formFields: {
-        fullName: "",
+        username: "",
         email: "",
         password: "",
       },
@@ -149,9 +149,22 @@ export default {
         this.resetValidation();
         this.trimFormInputs();
         const { valid } = await this.form.validate(); // use the type assertion
-      } catch (error) {}
 
-      //TODO: submit the form
+        if (valid) {
+          const data = this.formFields;
+          const options = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          };
+
+          // TODO: do something after user creation
+          fetch("http://localhost:3100/api/v1/auth/register", options)
+            .then((response) => response.json())
+            .then((data) => console.log(data))
+            .catch((error) => console.error(error));
+        }
+      } catch (error) {}
     },
     reset() {
       this.form.reset();
