@@ -90,9 +90,9 @@ export default {
     return {
       showPassword: false,
       formFields: {
-        username: "",
-        email: "",
-        password: "",
+        username: "leonardo salas",
+        email: "leosalass@gmail.com",
+        password: "Asd123..",
       },
       formRules: {
         required: (v: string | null | undefined) => !!v || "Required",
@@ -158,11 +158,17 @@ export default {
             body: JSON.stringify(data),
           };
 
-          // TODO: do something after user creation
-          fetch("http://localhost:3100/api/v1/auth/register", options)
-            .then((response) => response.json())
-            .then((data) => console.log(data))
-            .catch((error) => console.error(error));
+          const response = await fetch(
+            "http://localhost:3100/api/v1/auth/register",
+            options
+          );
+          const responseData = await response.json();
+
+          if(response.ok) {
+            this.$router.push("/auth/login");
+          }else{
+            throw new Error(responseData.message);
+          }
         }
       } catch (error) {}
     },
