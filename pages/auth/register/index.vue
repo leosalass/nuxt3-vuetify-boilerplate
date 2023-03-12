@@ -90,9 +90,9 @@ export default {
     return {
       showPassword: false,
       formFields: {
-        username: "leonardo salas",
-        email: "leosalass@gmail.com",
-        password: "Asd123..",
+        username: "",
+        email: "",
+        password: "",
       },
       formRules: {
         required: (v: string | null | undefined) => !!v || "Required",
@@ -150,6 +150,8 @@ export default {
         this.trimFormInputs();
         const { valid } = await this.form.validate(); // use the type assertion
 
+        const runtimeConfig = useRuntimeConfig();
+
         if (valid) {
           const data = this.formFields;
           const options = {
@@ -157,9 +159,10 @@ export default {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
           };
+          console.log(runtimeConfig.public)
 
           const response = await fetch(
-            "http://localhost:3100/api/v1/auth/register",
+            `${runtimeConfig.public.apiBaseUrl}/auth/register`,
             options
           );
           const responseData = await response.json();
