@@ -78,21 +78,33 @@
   </NuxtLayout>
 </template>
 
-<script setup lang="ts">
-definePageMeta({
-  layout: false,
-});
-</script>
-
 <script lang="ts">
+import { useApiStore } from "~/store/api";
+import { storeToRefs } from "pinia";
+
 export default {
+  setup() {
+    const apiStore = useApiStore();
+    const { errorMessages } = storeToRefs(apiStore);
+    const { addErrorMessage } = apiStore;
+
+    definePageMeta({
+      layout: false,
+    });
+
+    return {
+      apiStore,
+      errorMessages,
+      addErrorMessage
+    }
+  },
   data() {
     return {
       showPassword: false,
       formFields: {
-        username: "",
-        email: "",
-        password: "",
+        username: "leonardo salas",
+        email: "leosalass@gmail.com",
+        password: "Asd123..",
       },
       formRules: {
         required: (v: string | null | undefined) => !!v || "Required",
@@ -159,7 +171,7 @@ export default {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
           };
-          console.log(runtimeConfig.public)
+          console.log(runtimeConfig.public);
 
           const response = await fetch(
             `${runtimeConfig.public.apiBaseUrl}/auth/register`,
@@ -167,10 +179,10 @@ export default {
           );
           const responseData = await response.json();
 
-          if(response.ok) {
+          if (response.ok) {
             this.$router.push("/auth/login");
-          }else{
-            throw new Error(responseData.message);
+          } else {
+            this.addErrorMessage(responseData.message);
           }
         }
       } catch (error) {}

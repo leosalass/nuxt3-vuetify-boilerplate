@@ -1,10 +1,6 @@
 <template>
   <div class="d-flex justify-center mb-6 bg-surface-variant">
-    <v-sheet
-      class="d-flex align-center mb-6 pa-6"
-      :height="wH"
-      v-if="visible"
-    >
+    <v-sheet class="d-flex align-center mb-6 pa-6" :height="wH" v-if="visible">
       <v-card
         max-width="550"
         :loading="false"
@@ -12,11 +8,26 @@
         :style="style"
         class="rounded-lg"
       >
+      <v-alert v-for="(error, index) in errorMessages" :key="index"
+      closable
+      icon="mdi-vuetify"
+      title="Alert title"
+      :text="error"
+      type="error"
+    ></v-alert>
         <slot />
       </v-card>
     </v-sheet>
   </div>
 </template>
+
+<script lang="ts" setup>
+import { useApiStore } from "~/store/api";
+import { storeToRefs } from "pinia";
+
+const apiStore = useApiStore();
+const { errorMessages } = storeToRefs(apiStore);
+</script>
 
 <script lang="ts">
 export default {
@@ -34,6 +45,7 @@ export default {
   },
 };
 </script>
+
 <style>
 .text-center {
   text-align: center;

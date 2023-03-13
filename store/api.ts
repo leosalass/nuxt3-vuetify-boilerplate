@@ -4,14 +4,14 @@ export const useApiStore = defineStore({
   id: 'api-store',
   state: () => {
     return {
-      errorMessages: ['youtube', 'twitch'],
+      errorMessages: [],
     }
   },
   actions: {
-    addError(value: string) {
+    addErrorMessage(value: string) {
       this.errorMessages.push(value)
     },
-    removeError(value: number){
+    removeErrorMessage(value: number){
       this.errorMessages.splice(value, 1);
     },
     cleanErrorMessages(){
